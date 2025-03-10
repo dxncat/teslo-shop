@@ -1,10 +1,9 @@
 import Link from 'next/link';
 
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
 
 
-import { QuantitySelector, Title } from '@/components';
+import { Title } from '@/components';
 import { initialData } from '@/seed/seed';
 
 
@@ -102,7 +101,7 @@ export default function () {
                             <p className="mb-5">
                                 {/* Disclaimer */}
                                 <span className="text-xs">
-                                    Al hacer clic en "Colocar orden", aceptas nuestros <a href="#" className="underline">términos y condiciones</a> y <a href="#" className="underline">política de privacidad</a>
+                                    Al hacer clic en &quot;Colocar orden&quot;, aceptas nuestros <a href="#" className="underline">términos y condiciones</a> y <a href="#" className="underline">política de privacidad</a>
                                 </span>
                             </p>
 
