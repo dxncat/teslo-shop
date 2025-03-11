@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "ts-node src/seed/database-seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",
@@ -29,6 +30,7 @@
     "eslint-config-next": "15.2.0",
     "prisma": "^6.4.1",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
