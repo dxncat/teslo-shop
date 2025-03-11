@@ -7,9 +7,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Teslo | Shop",
-  description: "Una tienda virtual de productos.",
-};
+  title: {
+    template: '%s - Teslo | Shop',
+    default: 'Home - Teslo | Shop'
+  },
+  description: 'Una tienda virtual de productos',
+}
 
 export default function RootLayout({
   children,
