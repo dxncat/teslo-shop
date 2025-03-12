@@ -6,6 +6,7 @@ import { tittleFont } from '@/config/fonts';
 import { MobileSlideshow, QuantitySelector, SizeSelector, Slideshow, StockLabel } from '@/components';
 import { getProductBySlug } from '@/actions';
 import { Metadata, ResolvingMetadata } from 'next';
+import { AddToCart } from './ui/AddToCart';
 
 interface Props {
     params: {
@@ -17,6 +18,7 @@ export async function generateMetadata(
     { params }: Props,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
+
     // read route params
     const slug = params.slug;
 
@@ -80,23 +82,7 @@ export default async function ({ params }: Props) {
 
                 <p className="text-lg mb-5">${product.price}</p>
 
-                {/* Selector de Tallas */}
-                <SizeSelector
-                    selectedSize={product.sizes[0]}
-                    availableSizes={product.sizes}
-                />
-
-
-                {/* Selector de Cantidad */}
-                <QuantitySelector
-                    quantity={2}
-                />
-
-
-                {/* Button */}
-                <button className="btn-primary my-5">
-                    Agregar al carrito
-                </button>
+                <AddToCart product={product} />
 
                 {/* Descripción */}
                 <h3 className="font-bold text-sm">Descripción</h3>
