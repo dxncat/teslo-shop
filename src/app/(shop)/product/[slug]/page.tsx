@@ -3,9 +3,9 @@ export const revalidate = 604800; // 7 Dias
 import { notFound } from 'next/navigation';
 
 import { tittleFont } from '@/config/fonts';
-import { MobileSlideshow, QuantitySelector, SizeSelector, Slideshow, StockLabel } from '@/components';
+import { MobileSlideshow, Slideshow, StockLabel } from '@/components';
 import { getProductBySlug } from '@/actions';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import { AddToCart } from './ui/AddToCart';
 
 interface Props {
@@ -15,8 +15,7 @@ interface Props {
 }
 
 export async function generateMetadata(
-    { params }: Props,
-    parent: ResolvingMetadata
+    { params }: Props
 ): Promise<Metadata> {
 
     // read route params

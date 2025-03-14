@@ -4,6 +4,7 @@ import { getPaginatedProductsWithImages } from '@/actions';
 import { Pagination, ProductGrid, Title } from '@/components';
 
 import { Gender } from '@prisma/client';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 
@@ -17,6 +18,29 @@ interface Props {
     }
 }
 
+export async function generateMetadata(
+    { params }: Props
+): Promise<Metadata> {
+
+    // read route params
+    const { gender } = await params;
+
+    // fetch data
+
+    // optionally access and extend (rather than replace) parent metadata
+    // const previousImages = (await parent).openGraph?.images || []
+
+    return {
+        title: gender ?? "Producto no encontrado",
+        description: `La mejor ropa para ${gender} en un solo lugar`,
+        openGraph: {
+            title: gender ?? "Producto no encontrado",
+            description: `La mejor ropa para ${gender} en un solo lugar`,
+            images: ["/imgs/starman_750x750.png"],
+        },
+    };
+}
+
 
 export default async function GenderByPage({ params, searchParams }: Props) {
 
@@ -24,7 +48,7 @@ export default async function GenderByPage({ params, searchParams }: Props) {
 
     const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
-    const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({
+    const { products, totalPages } = await getPaginatedProductsWithImages({
         page,
         gender: gender as Gender,
     });

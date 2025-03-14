@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { Title } from '@/components';
 import { initialData } from '@/seed/seed';
+import { Metadata } from 'next';
 
 
 const productsInCart = [
@@ -12,6 +13,21 @@ const productsInCart = [
     initialData.products[1],
     initialData.products[2],
 ];
+
+export async function generateMetadata(
+): Promise<Metadata> {
+
+
+    return {
+        title: "Checkout",
+        description: "A un paso de llevar tus productos",
+        openGraph: {
+            title: "Checkout",
+            description: "A un paso de llevar tus productos",
+            images: ["/imgs/starman_750x750.png"],
+        }
+    };
+}
 
 
 export default function () {

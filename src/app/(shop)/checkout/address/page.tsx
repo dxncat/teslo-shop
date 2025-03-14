@@ -1,6 +1,22 @@
 import Link from 'next/link';
 
 import { Title } from '@/components';
+import { Metadata } from 'next';
+
+export async function generateMetadata(
+): Promise<Metadata> {
+
+
+    return {
+        title: "Dirección de entrega",
+        description: "Añade tu dirección de entrega",
+        openGraph: {
+            title: "Dirección de entrega",
+            description: "Añade tu dirección de entrega",
+            images: ["/imgs/starman_750x750.png"],
+        }
+    };
+}
 
 export default function () {
     return (
