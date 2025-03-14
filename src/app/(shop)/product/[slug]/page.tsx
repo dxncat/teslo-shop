@@ -20,7 +20,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
 
     // read route params
-    const slug = params.slug;
+    const { slug } = await params;
 
     // fetch data
     const product = await getProductBySlug(slug);
