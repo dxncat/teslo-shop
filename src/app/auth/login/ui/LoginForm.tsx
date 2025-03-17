@@ -8,8 +8,6 @@ export const LoginForm = () => {
 
     const [state, dispatch] = useActionState(authenticate, undefined)
 
-    console.log({ state })
-
     return (
         <form action={dispatch} className="flex flex-col">
 
