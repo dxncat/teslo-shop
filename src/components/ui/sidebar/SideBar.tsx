@@ -1,5 +1,6 @@
 'use client';
 
+import { logout } from '@/actions';
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -77,12 +78,15 @@ export const SideBar = () => {
                     <span className='ml-3 text-xl'>Iniciar sesión</span>
                 </Link>
 
-                <Link
-                    href='/'
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                <button
+                    onClick={() => {
+                        logout()
+                        closeSideMenu()
+                    }}
+                    className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded cursor-pointer transition-all'>
                     <IoLogOutOutline size={30} />
                     <span className='ml-3 text-xl'>Cerrar sesión</span>
-                </Link>
+                </button>
 
                 {/* Line Separator */}
                 <div className='w-full h-px bg-gray-200 my-10' />
