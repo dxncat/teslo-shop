@@ -3,13 +3,22 @@
 import { authenticate } from "@/actions"
 import clsx from "clsx"
 import Link from "next/link"
-import { useActionState } from "react"
+import { useRouter } from "next/navigation"
+import { useActionState, useEffect } from "react"
 import { useFormStatus } from "react-dom"
 import { IoInformationOutline } from "react-icons/io5"
 
 export const LoginForm = () => {
 
     const [state, dispatch] = useActionState(authenticate, undefined)
+    const router = useRouter()
+
+    useEffect(() => {
+        if (state === "Success") {
+            router.replace("/")
+        }
+    }, [state])
+
 
     return (
         <form action={dispatch} className="flex flex-col">
