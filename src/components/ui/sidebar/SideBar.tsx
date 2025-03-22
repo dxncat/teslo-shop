@@ -14,6 +14,7 @@ export const SideBar = () => {
     const closeSideMenu = useUIStore(state => state.closeSidebar);
 
     const { data: session } = useSession();
+    const isAuthenticated = !!session?.user
 
     return (
         <div>
@@ -73,23 +74,31 @@ export const SideBar = () => {
                     <span className='ml-3 text-xl'>Ordenes</span>
                 </Link>
 
-                <Link
-                    href='/auth/login'
-                    onClick={closeSideMenu}
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoLogInOutline size={30} />
-                    <span className='ml-3 text-xl'>Iniciar sesión</span>
-                </Link>
+                {
+                    isAuthenticated && (
+                        <button
+                            onClick={() => {
+                                logout()
+                                closeSideMenu()
+                            }}
+                            className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded cursor-pointer transition-all'>
+                            <IoLogOutOutline size={30} />
+                            <span className='ml-3 text-xl'>Cerrar sesión</span>
+                        </button>
+                    )
+                }
 
-                <button
-                    onClick={() => {
-                        logout()
-                        closeSideMenu()
-                    }}
-                    className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded cursor-pointer transition-all'>
-                    <IoLogOutOutline size={30} />
-                    <span className='ml-3 text-xl'>Cerrar sesión</span>
-                </button>
+                {
+                    !isAuthenticated && (
+                        <Link
+                            href='/auth/login'
+                            onClick={closeSideMenu}
+                            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                            <IoLogInOutline size={30} />
+                            <span className='ml-3 text-xl'>Iniciar sesión</span>
+                        </Link>
+                    )
+                }
 
                 {/* Line Separator */}
                 <div className='w-full h-px bg-gray-200 my-10' />
