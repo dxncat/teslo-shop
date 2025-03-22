@@ -19,6 +19,7 @@ export default async function () {
                     JSON.stringify(session.user, null, 2)
                 }
             </pre>
+            <h3>{session.user.role}</h3>
         </div>
     );
 }
