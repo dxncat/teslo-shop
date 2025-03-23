@@ -16,8 +16,8 @@ export async function authenticate(
 
         return 'Success'
 
-    } catch (error) {
-        if ((error as any).type === 'CredentialsSignin') {
+    } catch (error: any) {
+        if (error.type === 'CredentialsSignin') {
             return 'CredentialsSignin'
         }
         return 'Error al autenticar'
