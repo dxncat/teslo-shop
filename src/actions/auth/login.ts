@@ -23,3 +23,22 @@ export async function authenticate(
         return 'Error al autenticar'
     }
 }
+
+export const login = async (email: string, password: string) => {
+    try {
+        await signIn('credentials', {
+            email,
+            password,
+        })
+        return {
+            ok: true,
+            message: 'Usuario autenticado correctamente'
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            ok: false,
+            message: 'Error al autenticar el usuario'
+        }
+    }
+}
