@@ -1,6 +1,7 @@
 'use client';
 
 import { logout } from '@/actions';
+import { tittleFont } from '@/config/fonts';
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
@@ -15,6 +16,7 @@ export const SideBar = () => {
 
     const { data: session } = useSession();
     const isAuthenticated = !!session?.user
+    const isAdmin = session?.user?.role === 'admin'
 
     return (
         <div>
@@ -58,38 +60,73 @@ export const SideBar = () => {
                     />
                 </div>
 
-                {/* Menu */}
-                <Link
-                    href='/profile'
-                    onClick={closeSideMenu}
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoPersonOutline size={30} />
-                    <span className='ml-3 text-xl'>Perfil</span>
-                </Link>
+                {isAuthenticated && (
+                    <>
+                        {/* Menu */}
+                        <Link
+                            href='/profile'
+                            onClick={closeSideMenu}
+                            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                            <IoPersonOutline size={30} />
+                            <span className='ml-3 text-xl'>Perfil</span>
+                        </Link>
 
-                <Link
-                    href='/'
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoTicketOutline size={30} />
-                    <span className='ml-3 text-xl'>Ordenes</span>
-                </Link>
+                        <Link
+                            href='/'
+                            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                            <IoTicketOutline size={30} />
+                            <span className='ml-3 text-xl'>Ordenes</span>
+                        </Link>
 
+                        {/* Line Separator */}
+                    </>
+                )}
+
+                {/* Admin */}
                 {
-                    isAuthenticated && (
-                        <button
-                            onClick={() => {
-                                logout()
-                                closeSideMenu()
-                            }}
-                            className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded cursor-pointer transition-all'>
-                            <IoLogOutOutline size={30} />
-                            <span className='ml-3 text-xl'>Cerrar sesión</span>
-                        </button>
+                    isAdmin && (
+                        <>
+                            <div className='w-full h-px bg-gray-200 my-10' />
+                            <Link
+                                href='/'
+                                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                                <IoShirtOutline size={30} />
+                                <span className='ml-3 text-xl'>Productos</span>
+                            </Link>
+
+                            <Link
+                                href='/'
+                                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                                <IoTicketOutline size={30} />
+                                <span className='ml-3 text-xl'>Ordenes</span>
+                            </Link>
+
+                            <Link
+                                href='/'
+                                className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                                <IoPeopleOutline size={30} />
+                                <span className='ml-3 text-xl'>Usuarios</span>
+                            </Link>
+                        </>
                     )
                 }
 
+
                 {
-                    !isAuthenticated && (
+                    isAuthenticated ? (
+                        <>
+                            <div className='w-full h-px bg-gray-200 my-10' />
+                            <button
+                                onClick={() => {
+                                    logout()
+                                    closeSideMenu()
+                                }}
+                                className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded cursor-pointer transition-all'>
+                                <IoLogOutOutline size={30} />
+                                <span className='ml-3 text-xl'>Cerrar sesión</span>
+                            </button>
+                        </>
+                    ) : (
                         <Link
                             href='/auth/login'
                             onClick={closeSideMenu}
@@ -99,32 +136,6 @@ export const SideBar = () => {
                         </Link>
                     )
                 }
-
-                {/* Line Separator */}
-                <div className='w-full h-px bg-gray-200 my-10' />
-
-
-                {/* Admin */}
-                <Link
-                    href='/'
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoShirtOutline size={30} />
-                    <span className='ml-3 text-xl'>Productos</span>
-                </Link>
-
-                <Link
-                    href='/'
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoTicketOutline size={30} />
-                    <span className='ml-3 text-xl'>Ordenes</span>
-                </Link>
-
-                <Link
-                    href='/'
-                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
-                    <IoPeopleOutline size={30} />
-                    <span className='ml-3 text-xl'>Usuarios</span>
-                </Link>
 
             </nav>
 
