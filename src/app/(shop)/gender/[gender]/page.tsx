@@ -44,7 +44,7 @@ export async function generateMetadata(
 
 export default async function GenderByPage({ params, searchParams }: Props) {
 
-    const { gender } = params;
+    const { gender } = await params;
 
     const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
