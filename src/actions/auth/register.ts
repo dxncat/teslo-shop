@@ -20,7 +20,8 @@ export const registerUser = async (name: string, email: string, password: string
 
         return {
             ok: true,
-            user: user
+            user: user,
+            message: 'Usuario registrado correctamente'
         }
 
     } catch (error) {
