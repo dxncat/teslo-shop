@@ -4,6 +4,8 @@ import { z } from "zod";
 import prisma from "./lib/prisma";
 import bcryptjs from "bcryptjs";
 
+const authenticatedRoutes = []
+
 export const authConfig: NextAuthConfig = {
     pages: {
         signIn: "/auth/login",
@@ -11,6 +13,12 @@ export const authConfig: NextAuthConfig = {
     },
 
     callbacks: {
+
+        authorized({ auth, request: { nextUrl } }) {
+
+            return true
+        },
+
         jwt({ token, user }) {
             if (user) {
                 token.data = user;
